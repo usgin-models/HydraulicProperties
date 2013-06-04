@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:aasg="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/HydraulicProperties/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" xmlns:gmlsf="http://www.opengis.net/gmlsf" targetNamespace="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/HydraulicProperties/1.0" elementFormDefault="qualified" version="1.08">
+	<xs:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
+	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
+	<xs:annotation>
+		<!-- This XSD document, including XML schema, is designed for data delivery for hydraulic property observations obtained from boreholes for the National Geothermal Data System, with fields becoming XML elements in interchange documents for WFS simple features/geothermal data web services. Typically hydraulic properties are collected during pump testing and/or laboratory analysis, and this information will be provided through a hydraulic property observation service.  The HeaderURI for a particular borehole (well for simple wells) is the cross-referencing link (foreign key) used to associate the header record, well logs, temperature measurements, and other information from a particular borehole.-->
+		<!--This XSD document was created on 2013-06-04 by Christy Caudill, AZGS.-->
+		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
+			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
+			<gmlsf:GMLProfileSchema>
+http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gmlsf:GMLProfileSchema>
+		</xs:appinfo>
+	</xs:annotation>
+	<xs:element name="HydraulicProperty" type="aasg:HydraulicPropertyType" substitutionGroup="gml:_Feature"/>
+	<xs:complexType name="HydraulicPropertyType">
+		<xs:complexContent>
+			<xs:extension base="gml:AbstractFeatureType">
+				<xs:sequence>
+					<xs:element name="OBJECTID" type="xs:int" minOccurs="0"/>
+					<xs:element name="ObservationURI">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="ObservationName" type="xs:string"/>
+					<xs:element name="WellType" type="xs:string"/>
+					<xs:element name="HeaderURI">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="WellName" type="xs:string" minOccurs="0"/>
+					<xs:element name="OtherID" type="xs:string" minOccurs="0"/>
+					<xs:element name="County" type="xs:string"/>
+					<xs:element name="State" type="xs:string"/>
+					<xs:element name="LatDegreeWGS84" type="xs:double"/>
+					<xs:element name="LongDegreeWGS84" type="xs:double"/>
+					<xs:element name="LocationUncertaintyStatement" type="xs:string"/>
+					<xs:element name="DepthTopInterval_ft" type="xs:double"/>
+					<xs:element name="DepthBottomInterval_ft" type="xs:double"/>
+					<xs:element name="RockType" type="xs:string"/>
+					<xs:element name="Lithology" type="xs:string" minOccurs="0"/>
+					<xs:element name="GeologicUnitName" type="xs:string"/>
+					<xs:element name="VerticalConductivity_ft_day" type="xs:double" minOccurs="0"/>
+					<xs:element name="HorizontalConductivity_ft_day" type="xs:double" minOccurs="0"/>
+					<xs:element name="SpecificStorage" type="xs:double" minOccurs="0"/>
+					<xs:element name="UnitsStorage" type="xs:string" minOccurs="0"/>
+					<xs:element name="Permeability" type="xs:double" minOccurs="0"/>
+					<xs:element name="UnitsPermeability" type="xs:string" minOccurs="0"/>
+					<xs:element name="SpecificYield_percent" type="xs:double" minOccurs="0"/>
+					<xs:element name="Transmissivity" type="xs:double" minOccurs="0"/>
+					<xs:element name="Transmissivity_units" type="xs:string" minOccurs="0"/>
+					<xs:element name="EffectivePorosity" type="xs:double" minOccurs="0"/>
+					<xs:element name="ObservationMethod" type="xs:string"/>
+					<xs:element name="RelatedResource" type="xs:string" minOccurs="0"/>
+					<xs:element name="Source" type="xs:string"/>
+					<xs:element name="MetadataURI" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:maxLength value="255"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>
