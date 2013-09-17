@@ -3,8 +3,8 @@
 	<xs:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
 	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
 	<xs:annotation>
-		<!-- This XSD document, including XML schema, is designed for data delivery for hydraulic property observations obtained from boreholes for the National Geothermal Data System, with fields becoming XML elements in interchange documents for WFS simple features/geothermal data web services. Typically hydraulic properties are collected during pump testing and/or laboratory analysis, and this information will be provided through a hydraulic property observation service.  The HeaderURI for a particular borehole (well for simple wells) is the cross-referencing link (foreign key) used to associate the header record, well logs, temperature measurements, and other information from a particular borehole.-->
-		<!--This XSD document was created on 2013-06-04 by Christy Caudill, AZGS.-->
+		<!-- This XSD document, including XML schema, is designed for data delivery for hydraulic property observations obtained from boreholes for the National Geothermal Data System, with fields becoming XML elements in interchange documents for WFS simple features/geothermal data web services. Typically hydraulic properties are collected during pump testing and/or laboratory analysis, and this information will be provided through a hydraulic property observation service. The HeaderURI for a particular borehole (well for simple wells) is the cross-referencing link (foreign key) used to associate the header record, well logs, temperature measurements, and other information from a particular borehole.-->
+		<!--Annotated version 1.0.1. This XSD document was created on 2013-06-04 by Christy Caudill, AZGS. Field Description annotations standardized 2013-08-22 by Esty Pape, AZGS. -->
 		<xs:appinfo source="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd">
 			<gmlsf:ComplianceLevel>0</gmlsf:ComplianceLevel>
 			<gmlsf:GMLProfileSchema>
@@ -16,56 +16,181 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 		<xs:complexContent>
 			<xs:extension base="gml:AbstractFeatureType">
 				<xs:sequence>
-					<xs:element name="OBJECTID" type="xs:int" minOccurs="0"/>
+					<xs:element name="OBJECTID" type="xs:int" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Integer record count, added by ArcGIS servers during service deployment; not required but cannot be removed when deploying from ArcGIS feature class. Not user maintained, so this element appears in XML implementation but not in the Content Model Template.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="ObservationURI">
+						<xs:annotation>
+							<xs:documentation>Unique identifier for this observation. This is the identifier (Uniform Resource Identifier) that will be used to cross-reference data, samples, and other observations to the observation represented by this record. Best practice is to define an http URI that will dereference to a normative description of the observation. USGIN URI's may be redirected to any URL using the http://resources.usgin.org redirector; contact the USGIN development team at AZGS for instructions.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="ObservationName" type="xs:string"/>
-					<xs:element name="WellType" type="xs:string"/>
+					<xs:element name="ObservationName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>The human-intelligible name for the observation; may be a concatenation of observation type and feature name.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="WellType" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Type of well that contains the borehole identified by the HeaderURI, at the time indicated in the StatusDate element.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="HeaderURI">
+						<xs:annotation>
+							<xs:documentation>Unique identifier for the borehole indicated by this record. This identifier should identify the physical well, based on the API number if available. Otherwise, the URI should incorporate one of the OtherID values. Please contact the USGIN development team at AZGS for instructions.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="WellName" type="xs:string" minOccurs="0"/>
-					<xs:element name="OtherID" type="xs:string" minOccurs="0"/>
-					<xs:element name="County" type="xs:string"/>
-					<xs:element name="State" type="xs:string"/>
-					<xs:element name="LatDegreeWGS84" type="xs:double"/>
-					<xs:element name="LongDegreeWGS84" type="xs:double"/>
-					<xs:element name="LocationUncertaintyStatement" type="xs:string"/>
-					<xs:element name="DepthTopInterval_ft" type="xs:double"/>
-					<xs:element name="DepthBottomInterval_ft" type="xs:double"/>
-					<xs:element name="RockType" type="xs:string"/>
-					<xs:element name="Lithology" type="xs:string" minOccurs="0"/>
-					<xs:element name="GeologicUnitName" type="xs:string"/>
-					<xs:element name="VerticalConductivity_ft_day" type="xs:double" minOccurs="0"/>
-					<xs:element name="HorizontalConductivity_ft_day" type="xs:double" minOccurs="0"/>
-					<xs:element name="SpecificStorage" type="xs:double" minOccurs="0"/>
-					<xs:element name="UnitsStorage" type="xs:string" minOccurs="0"/>
-					<xs:element name="Permeability" type="xs:double" minOccurs="0"/>
-					<xs:element name="UnitsPermeability" type="xs:string" minOccurs="0"/>
-					<xs:element name="SpecificYield_percent" type="xs:double" minOccurs="0"/>
-					<xs:element name="Transmissivity" type="xs:double" minOccurs="0"/>
-					<xs:element name="Transmissivity_units" type="xs:string" minOccurs="0"/>
-					<xs:element name="EffectivePorosity" type="xs:double" minOccurs="0"/>
-					<xs:element name="ObservationMethod" type="xs:string"/>
-					<xs:element name="RelatedResource" type="xs:string" minOccurs="0"/>
-					<xs:element name="Source" type="xs:string"/>
+					<xs:element name="WellName" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Common or human-readable name by which the feature is known. Recommend using only web-safe characters (a-z A-Z 0-9 _-.) in the name. Be consistent in the naming convention used within any given dataset.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="OtherID" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Alternative identifier(s) for the feature. Indicate the authority from which the OtherID is derived with a short (lower case) prefix delimited by a colon ':' If identifiers from multiple different authorities are available, delimit these identifiers with the pipe '|' character. For example, if a well were known to the Arizona Geological Survey (AZGS) by the id number 1337, the prefix would be azgs: and the identifier string would be azgs:1337. Any such prefixes used to scope identifiers should be explained in the dataset metadata.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="County" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>County name. If unknown or not applicable use 'missing'. If offshore, specify 'offshore' in this field.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="State" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>State without abbreviations. If unknown or not applicable use 'missing'. For offshore locations, specify the governing or nearest state and list the county as 'offshore'.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LatDegreeWGS84" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Latitude coordinate for the surface location of the feature; values should be provided with at least 4 significant digits for sufficient precision (7 decimal places is recommended by the USGS (OFR 02-463, p. 6). Use decimal degrees.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LongDegreeWGS84" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Longitude coordinate for the surface location of the feature; values should be provided with at least 4 significant digits for sufficient precision (7 decimal places is recommended by the USGS (OFR 02-463, p. 6). Use decimal degrees.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="LocationUncertaintyStatement" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Information on how the original location was determined, e.g., 1:250,000 map, gps unit, Google Earth, PLSS Conversion, Spatial Datum Conversion, e.g., NAD27 to WGS84.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DepthTopInterval_ft" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Depth to the top of the interval, reported in feet from borehole origin.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="DepthBottomInterval_ft" type="xs:double">
+						<xs:annotation>
+							<xs:documentation>Depth to the bottom of the interval, reported in feet from borehole origin.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RockType" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Free text name for lithology category of sample, e.g. biotite-hornblende granite, lithofeldspathic sandstone, calcareous arkose, biotite schist.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Lithology" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Description of the lithology of surface geology or geologic column for well interval, e.g. granite, sandstone, limestone, arkose, schist. Recommend using CGI simple lithology vocabulary (see tab in this workbook). Use to account for EarthChem Material, EarthChem Type, EarthChem Composition, alluvium, 36-40': gravels; etc.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="GeologicUnitName" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Name of geologic unit that was sampled. Include hierarchy of names if the unit is part of a higher-rank geologic unit, e.g. Group name/Formation name, or Formation/Member, or Group/ Formation. Spell out unit names in full.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="VerticalConductivity_ft_day" type="xs:double" minOccurs="0">
+					<xs:annotation>
+							<xs:documentation>Physical property that quantitatively describes the ability of a fluid to move vertically through the pore spaces and/or fractures in a material. Report Conductivity values in ft/day.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="HorizontalConductivity_ft_day" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Physical property that quantitatively describes the ability of a fluid to move horizontally through the pore spaces and/or fractures in a material. Report Conductivity values in ft/day.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SpecificStorage" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The volume of water an aquifer releases from or takes into storage per unit surface area of the aquifer per unit change in head.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="UnitsStorage" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Units for the reported specific storage. (1/[length]).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Permeability" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The property or capacity of a porous rock, sediment, or soil for transmitting a fluid; it is a measure of the relative ease of fluid flow under unequal pressure.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="UnitsPermeability" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Units for the reported permability. The SI unit for permeability is m^2. A practical unit for permeability is the darcy (D), or more commonly the millidarcy (mD) (1 darcy \approx10−12/m^2). </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="SpecificYield_percent" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The ratio of the volume of water that a given mass of saturated rock or soil will yield by gravity to the volume of that mass.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Transmissivity" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The transmissivity is a measure of how much water can be transmitted horizontally, such as to a pumping well. Transmissivity is directly proportional to horizontal hydraulic conductivity and thickness of the transmitting layer.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Transmissivity_units" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Units are (length)^2/Time.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="EffectivePorosity" type="xs:double" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The percentage of pore volume or void space, or that volume within rock that can contain fluids.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="ObservationMethod" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Text description of how the measurement was made - instrumentation, logging rate, correction or extrapolation process, how time since circulation was determined, etc. Data provider should indicate QA/QC performed on the data, including individual or institution, time frame and depth of quality check.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="RelatedResource" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>This may be one to many http links to resources (logs, pictures or other documents if available online. Should be an http:// address (URL)) related to the observation described in each record. Delimit multiple values with the pipe '|' character.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Source" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Mandatory. Short text explanation of source of information defining this feature or record; may be author-date type citation, well log, report, data files etc., but should include some indication of how digital data originated. If unpublished data, provide researcher name, date and research institution for proper citation. Separate multiple citations with pipe '|' character.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 					<xs:element name="MetadataURI" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>URI identifying (and ideally dereferencing to get) a full formal metadata record for the observation report. A time series of observations may all reference the same metadata record that provides contact information and details on procedure, etc.</xs:documentation>
+						</xs:annotation>
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
 								<xs:maxLength value="255"/>
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:element>
-					<xs:element name="Shape" type="gml:PointPropertyType"/>
+					<xs:element name="Shape" type="gml:PointPropertyType">
+						<xs:annotation>
+							<xs:documentation>Added by GIS for WFS service; this element appears in the xml output, but is generated during service deployment from the latitude and longitude, therefore it doesn't appear in the template.</xs:documentation>
+						</xs:annotation>
+						</xs:element>
 					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>
