@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:aasg="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/HydraulicProperties/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" xmlns:gmlsf="http://www.opengis.net/gmlsf" targetNamespace="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/HydraulicProperties/1.0" elementFormDefault="qualified" version="1.08">
+<xs:schema xmlns:aasg="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/HydraulicProperties/1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml" xmlns:gmlsf="http://www.opengis.net/gmlsf" targetNamespace="http://stategeothermaldata.org/uri-gin/aasg/xmlschema/HydraulicProperties/1.1" elementFormDefault="qualified" version="1.1">
 	<xs:import namespace="http://www.opengis.net/gml" schemaLocation="http://schemas.opengis.net/gml/3.1.1/base/gml.xsd"/>
 	<xs:import namespace="http://www.opengis.net/gmlsf" schemaLocation="http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsfLevels.xsd"/>
 	<xs:annotation>
@@ -71,12 +71,12 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 							<xs:documentation>State without abbreviations. If unknown or not applicable use 'missing'. For offshore locations, specify the governing or nearest state and list the county as 'offshore'.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="LatDegreeWGS84" type="xs:double">
+					<xs:element name="LatDegree" type="xs:double">
 						<xs:annotation>
 							<xs:documentation>Latitude coordinate for the surface location of the feature; values should be provided with at least 4 significant digits for sufficient precision (7 decimal places is recommended by the USGS (OFR 02-463, p. 6). Use decimal degrees.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="LongDegreeWGS84" type="xs:double">
+					<xs:element name="LongDegree" type="xs:double">
 						<xs:annotation>
 							<xs:documentation>Longitude coordinate for the surface location of the feature; values should be provided with at least 4 significant digits for sufficient precision (7 decimal places is recommended by the USGS (OFR 02-463, p. 6). Use decimal degrees.</xs:documentation>
 						</xs:annotation>
@@ -112,7 +112,7 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="VerticalConductivity_ft_day" type="xs:double" minOccurs="0">
-					<xs:annotation>
+						<xs:annotation>
 							<xs:documentation>Physical property that quantitatively describes the ability of a fluid to move vertically through the pore spaces and/or fractures in a material. Report Conductivity values in ft/day.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
@@ -190,7 +190,7 @@ http://schemas.opengis.net/gml/3.1.1/profiles/gmlsfProfile/1.0.0/gmlsf.xsd </gml
 						<xs:annotation>
 							<xs:documentation>Added by GIS for WFS service; this element appears in the xml output, but is generated during service deployment from the latitude and longitude, therefore it doesn't appear in the template.</xs:documentation>
 						</xs:annotation>
-						</xs:element>
+					</xs:element>
 					<xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
 				</xs:sequence>
 			</xs:extension>
